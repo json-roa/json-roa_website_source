@@ -1,18 +1,13 @@
-%h1 JSON-ROA
+%h1 Specification and Interpretation
 
-%p JSON-ROA - a JSON extension for resource and relation oriented architectures providing explorable APIs for humans and machines.
-
-%p.text-danger 
-  The JSON-ROA specification is not yet finished and thus BETA. The current version number is 
-  %code 0.0.0
+This is an informal specification of the JSON-ROA extension and
+how clients should interpret and use it.
 
 %h2 Content-Type 
 
 %code application/json-roa+json
 
-%h2.text-center  Specification by Example
-
-%h3.text-center  The JSON-ROA Object
+%h2  The JSON-ROA Object
 
 .row
   .col-md-6
@@ -21,9 +16,10 @@
       must contain the key `version` where the value must be formatted
       according to [Semantic Versioning][].
 
-      It may further contain the keys `relations`, `collection`, and `self-relation`.
-      See [Relations](#relation), [Colletion](#collection), and [Relation](#relation)
-      for the specification of the corresponding values.
+      It may further contain the keys `relations`, `collection`, `name`, and
+      `self-relation`. See [Relations](#relation), [Colletion](#collection),
+      and [Relation](#relation) for the specification of the corresponding
+      values.
 
         [Semantic Versioning]: http://semver.org/
   .col-md-6
@@ -45,7 +41,7 @@
 -
 
 %section#relations
-  %h3.text-center The Relations Object
+  %h3 The Relations Object
 
   .row
     .col-md-6
@@ -64,7 +60,7 @@
 -
 
 %section#relation-identifier
-  %h3.text-center 
+  %h3 
     Context and Interpretation of the Relation-Identifier
   .row
     .col-md-6
@@ -85,7 +81,7 @@
 
 
 %section#relation
-  %h3.text-center The Relation Object
+  %h3 The Relation Object
 
   .row
     .col-md-6
@@ -100,7 +96,7 @@
   -
 
   %section#relation
-    %h4.text-center The Href Value
+    %h4 The Href Value
     .row
       .col-md-6
         :markdown 
@@ -125,7 +121,7 @@
 
 
   %section#relation-name
-    %h4.text-center Context and Interpretation of the Name Value
+    %h4 Context and Interpretation of the Name Value
     .row
       .col-md-6
         :markdown 
@@ -134,7 +130,7 @@
           understandable output for the human user. 
 
   %section#relation-methods
-    %h4.text-center The Methods Object 
+    %h4 The Methods Object 
     .row
       .col-md-6
         :markdown 
@@ -164,5 +160,6 @@
 
 
 %section#collection
-  %h3.text-center The Collection Object
+  %h3 The Collection Object
 
+  %em TODO 

@@ -14,8 +14,13 @@
 
       %nav.navbar.navbar-default(role="navigation")
         .navbar-header
-          .navbar-brand 
+          %a.navbar-brand{href: "index.html"} 
             JSON-ROA 
-            %em (Beta)
+            %em (BETA)
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li
+              %a{href: "specification.html"} Specification
+
 
       = yield

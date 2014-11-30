@@ -1,0 +1,55 @@
+JSON-ROA
+========
+
+JSON-ROA - a JSON extension for resource and relation oriented architectures providing explorable APIs for humans and machines.
+
+The JSON-ROA specification is not yet finished and thus 
+_BETA_.
+
+Objectives and Properties 
+-------------------------
+
+### For RESTful HTTP 
+
+JSON-ROA is well suited for API build with REST in mind.
+
+### Unobtrusive
+
+JSON-ROA is designed to interfere as minimal as possible with the JSON
+structure. Support for existing RESTful APIs can added easily without
+breaking existing clients. 
+
+### Simplicity 
+
+JSON-ROA does a few things very well, at least much better than the existing
+proposals we found elsewhere. It favors simplicity over excessive flexibility.
+You might want to take a look at [JSON-LD](http://json-ld.org/) (which is
+actually pretty good) if you are looking for something alike. However, such
+flexibility comes with the price of complexity. 
+
+### For Humans
+
+We believe that there is value in providing tools such that humans can
+understand a API quickly and naturally. JSON-ROA features [The JSON-ROA
+Browser](/browser/index.html) to explore APIs. 
+
+### For Programmers 
+
+JSON-ROA is designed such that clients can be programmed with little
+effort and minimal risk of getting it wrong. 
+
+
+
+Differentiation
+---------------
+
+Constraints can be liberating. JSON-ROA does not support or discourages
+some practices deliberately. If you planing on doing much of the likes
+below we recommend to look somewhere else. 
+
+-   JSON-ROA does not support RPC style usage of HTTP very well.
+
+-   If your API is not resource oriented you might find yourself
+    fighting JSON-ROA.
+
+
