@@ -1,7 +1,7 @@
 JSON-ROA
 ========
 
-JSON-ROA - a JSON extension for resource and relation oriented architectures providing explorable APIs for humans and machines.
+JSON-ROA - a JSON extension for resource and relation oriented architecture providing explorable APIs for humans and machines.
 
 The JSON-ROA specification is not yet finished and thus 
 _BETA_.
