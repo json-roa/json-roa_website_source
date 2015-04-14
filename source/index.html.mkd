@@ -21,15 +21,12 @@ breaking existing clients.
 
 JSON-ROA does a few things very well, at least much better than the existing
 proposals we found elsewhere. It favors simplicity over excessive flexibility.
-You might want to take a look at [JSON-LD](http://json-ld.org/) (which is
-actually pretty good) if you are looking for something alike. However, such
-flexibility comes with the price of complexity. 
 
 ### For Humans
 
 We believe that there is value in providing tools such that humans can
 understand a API quickly and naturally. JSON-ROA features [The JSON-ROA
-Browser](/browser/index.html) to explore APIs. 
+Browser][] to explore APIs.
 
 ### For Programmers 
 
@@ -50,4 +47,7 @@ below we recommend to look somewhere else.
 -   If your API is not resource oriented you might find yourself
     fighting JSON-ROA.
 
+
+
+[The JSON-ROA Browser]: http://json-roa.github.io/browser/index.html
 

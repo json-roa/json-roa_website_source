@@ -175,7 +175,7 @@ equivalent resources. Conventionally only url paths ending with a slash , e.g.
 by many sites and even frameworks. 
 
 The collection object must contain a `relations` key 
-which contains a [relations](#relations) as described. 
+which contains as described in the section [relations object][].
 It is suggested to use integers as keys which represent 
 the index of the given link within the collection.
 

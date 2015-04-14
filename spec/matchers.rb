@@ -63,7 +63,7 @@ RSpec::Matchers.define :be_an_existing_uri do
     unless uri.site =~ /localhost/
       $logger.info "GET check #{uri}"
       @resp = Faraday.new(ssl: { verify: false }).get(uri)
-      (200..299).include? @resp.status
+      (200..399).include? @resp.status
     else
       true
     end
