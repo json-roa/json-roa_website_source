@@ -1,0 +1,263 @@
+{::options parse_block_html="true" /}
+
+
+# Specification and Interpretation
+
+This is an informal specification of the JSON-ROA extension and
+how clients should interpret and use it.
+
+
+## Semantic Versioning 
+
+JSON-ROA uses [Semantic Versioning][]. A client **must** evaluate the given
+semantic version and it **must fail** with an appropriate error if it is not
+compatible with the given _major number_. It may indicate discrepancies of the
+_minor number_ but it **must process** the request. 
+
+## The Content-Type 
+
+The JSON-ROA extension shall be present if and only if the
+resource is delivered with the content type `application/json-roa+json`.
+
+
+## The JSON-ROA Object
+
+<div class="row"> <div class="col-md-6">
+
+A minimal valid JSON-ROA extension is introduced with `_json-roa`. It
+must contain the key `version` where the value must be formatted
+according to [Semantic Versioning][]. See also the [section Semantic Versioning][].
+
+It may further contain the keys `relations`, `collection`, `name`, and
+`self-relation`. See the [relations object][], the [collection object][],
+and the [relation object][] for the specification of the corresponding
+values.
+
+</div> <div class="col-md-6">
+
+    { "_json-roa": { "version" : "1.0.0" }
+      , "x": "some other data"
+      , "y": 42
+      , "z": false }
+  {: .language-json}
+
+
+</div> </div>
+
+
+### The Relations Object
+
+<div class="row"> <div class="col-md-6">
+
+Relations is an object where the keys are _relation-identifiers_ and each
+corresponding value is a [relation object](#the-relation-object).
+
+</div> <div class="col-md-6">
+
+    { "_json-roa":
+      { "version" : "1.0.0"
+      , "relations": 
+          { "t42" : 
+            { "href" : "/task/42"} }}}
+  {: .language-json}
+
+</div> </div>
+
+
+
+### The Relation Identifier
+
+<div class="row"> <div class="col-md-6">
+
+The **identifier of a relation** is meant to be used in clients to dereference
+the relation object and in particular use the `href`-value within. 
+
+The example is taken from working with the [JSON-ROA Ruby Client][]. A
+resource `execution` has a relation with the identifier `tasks` which is
+used to perform an http GET request on URL given by the href-value.
+
+</div> <div class="col-md-6">
+    execution.relation('tasks').get()
+  {: .language-ruby}
+</div> </div>
+
+
+### The Relation Object
+<div class="row"> <div class="col-md-6">
+
+A relation is an object which must contain the key `href`. It may
+contain the keys `embedded`,`name`, `methods`, and `relations`. See the
+section [Meta Relations][] for the interpretation of `relations`. See
+the section [Embedding Resources][] for usage and interpretation of
+`embedded`.
+
+</div> <div class="col-md-6">
+    { "name": "Tasks",
+      "href": "/tasks/" }
+  {: .language-json}
+</div> </div>
+
+
+### The Href Value
+<div class="row"> <div class="col-md-6">
+
+The value of `href` is a string and represents an URI according to
+[RFC3986 Uniform Resource Identifier][]. It must at least contain a path
+segment. The values before the path segment are inferred form the
+current resource if not given. The URI may be templated according to
+[RFC6570 URI Template][].
+
+</div> <div class="col-md-6">
+
+~~~uri
+http://some-service.com/tasks/ 
+
+/task/{id}
+~~~
+</div> </div>
+
+
+#### Context and Interpretation of the Name Value
+<div class="row"> <div class="col-md-6">
+
+The name should not be used for technical purposes. 
+The name is used, e.g. by [The JSON-ROA Browser]() to give a readable and
+understandable output for the human user. 
+</div> </div>
+
+
+
+
+### The Methods Object 
+<div class="row"> <div class="col-md-6">
+
+The methods object may contain the keys `get`, `put`, `patch`, `post`, and `delete`. 
+Each value is an empty object at this time. 
+
+Clients should interpret the available HTTP-method to act on the
+given url respectively resource they address. 
+
+If the **no** `methods` are  given, clients **must assume** that 
+`get` and only `get` is available. 
+
+</div> <div class="col-md-6">
+
+~~~json 
+{ "name": "Tasks"
+, "href": "/tasks/" 
+, "methods": 
+  { "get": {} 
+  , "post": {}}}
+
+{ "methods": 
+  { "get": {} }}
+~~~
+     
+</div> </div>
+
+
+####  Meta Relations 
+<div class="row"> <div class="col-md-6">
+
+Relations of a Relation will often make little sense from an application
+viewpoint. There are other mentionable use cases. The first is finding
+documentation for humans. 
+
+</div> </div>
+
+
+### The Collection Object
+<div class="row"> <div class="col-md-6">
+
+The _collection_ object semantically links to a number of structurally
+equivalent resources. Conventionally only url paths ending with a slash , e.g.
+`/tasks/`, will contain a collection. This convention is apparently violated
+by many sites and even frameworks. 
+
+The collection object must contain a `relations` key 
+which contains a [relations](#relations) as described. 
+It is suggested to use integers as keys which represent 
+the index of the given link within the collection.
+
+The collection can contain a `next` key with the value of a [relation
+object][] with the following restriction: the included url may not be
+templated. Clients use `next` to iterate of a paginated collection. API
+providers should keep the search parameters between successive next link
+(with the exception of the parameter used for pagination if present).
+
+Any of the following to conditions signals the end of the 
+iteration for a client: 
+
+1. The relations object is empty. 
+2. There is no next key.
+
+</div> <div class="col-md-6">
+~~~json
+{"collection": {
+    "next": {
+      "href": "/tasks/?page=1"
+    },
+    "relations": {
+      "1": {
+        "name": "Task",
+        "href": "/task/6d5033f4-768f-55af-8efe-11e563f4af93"
+      },
+      "2": {
+        "name": "Task",
+        "href": "/task/2a8f061f-26dc-5b41-af9c-84f9ba54679a"
+      }}}}
+~~~
+</div> </div>
+
+
+
+### Embedding Resources
+
+<div class="row"> <div class="col-md-6">
+Embedding resources is an experimental proposal. There does
+not exist any implementation or proof of concept at this time.
+{: .text-warning}
+
+Any changes related to this feature do not warrant a lifting 
+of the major number!
+{: .text-warning}
+
+A [relation object][] can contain the key `embedded`. The corresponding
+value must be equal to the to JSON transformed response body given by
+requesting the resource with http get and receiving the representation
+of content-type `application/json-roa+json`. Some restrictions apply:
+
+1. The `href` value of the relation must not be a template url.  
+
+2. The http get method must be applicable to the resource. 
+
+Handling of embedded resources must be completely transparent. I.e. 
+clients must not depend on the existence of an embedded object. On 
+the other hand are clients not required to honor `embedded` 
+resources.
+
+JSON-ROA does not define any technique how to negotiate respectively 
+request embeddings. This is application and context dependent. A 
+custom HTTP header seems to be appropriate for many cases. 
+
+
+</div> <div class="col-md-6">
+</div> </div>
+
+
+<div class="row"> <div class="col-md-6">
+</div> <div class="col-md-6">
+</div> </div>
+
+
+  [Embedding Resources]: #embedding-resources
+  [JSON-ROA Ruby Client]: https://github.com/json-roa/json-roa_ruby-client
+  [Meta Relations]: #meta-relations
+  [RFC3986 Uniform Resource Identifier]: https://tools.ietf.org/html/rfc3986
+  [RFC6570 URI Template]: https://tools.ietf.org/html/rfc6570
+  [Semantic Versioning]: http://semver.org/
+  [section Semantic Versioning]: #semantic-versioning
+  [collection object]: #the-collection-object
+  [relation object]: #the-relation-object
+  [relation object]: #the-relation-object
+  [relations object]: #the-relations-object

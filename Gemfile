@@ -2,7 +2,7 @@
 # the following line to use "http://" instead
 source 'https://rubygems.org'
 
-gem "middleman", "~>3.3.7"
+gem "middleman", ">= 3.3", "< 4.0"
 gem "middleman-livereload", "~> 3.1.0"
 
 gem 'bootstrap-sass'
@@ -12,5 +12,14 @@ gem 'haml_coffee_assets'
 gem 'middleman-syntax'
 gem 'kramdown'
 
-gem 'bootswatch-sprockets', "~> 0.1"
+gem 'bootswatch-sprockets', "~> 1.0"
 #gem 'bootswatch-sprockets', path: '/Users/thomas/Programming/ROR/bootswatch-sprockets'
+ 
+ 
+gem 'pry'
+gem 'activesupport', '>= 4.1', '< 5.0'
+gem 'addressable'
+gem 'capybara'
+gem 'faraday'
+gem 'rspec'
+gem 'selenium-webdriver'
