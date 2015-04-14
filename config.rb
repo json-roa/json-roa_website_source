@@ -56,12 +56,11 @@ set :css_dir, 'stylesheets'
 
 set :js_dir, 'javascripts'
 
-activate :syntax, :line_numbers => true
+activate :syntax, line_numbers: true
 
 set :images_dir, 'images'
 
-set :haml, { ugly: true }
-
+set :haml, ugly: true
 
 # Build-specific configuration
 configure :build do

@@ -1,6 +1,7 @@
 1GB
 4GB
 API
+APIs
 Ansible
 Auth
 Clojure
@@ -10,6 +11,7 @@ ENV
 Github
 JDK
 JSON
+LD
 Leiningen
 MacOS
 Madek
@@ -19,7 +21,9 @@ Plugin
 PostgreSQL
 Postgresql
 REPL
+RESTful
 ROA
+RPC
 RabbitMQ
 Regualar
 Schank
