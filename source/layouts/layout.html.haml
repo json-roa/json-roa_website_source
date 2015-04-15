@@ -3,8 +3,12 @@
   %head
     %meta{charset: "utf-8"}
     %meta(name="viewport" content="width=device-width, initial-scale=1")
-    %title= "JSON-ROA (Beta)" 
+    %title= "JSON-ROA" 
 
+    %title 
+      %span JSON-ROA 
+      - if current_page.data.title.present?
+        %span  - #{current_page.data.title}
     = stylesheet_link_tag "app"
     = javascript_include_tag "app"
 

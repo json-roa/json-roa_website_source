@@ -1,32 +1,54 @@
+---
+title: Specification
+---
+
 {::options parse_block_html="true" /}
 
 
 # Specification and Interpretation
 
-This is an informal specification of the JSON-ROA extension and
-how clients should interpret and use it.
+This is an informal specification of the JSON-ROA extension and how clients
+must interpret it.
 
 
 ## Semantic Versioning 
 
-JSON-ROA uses [Semantic Versioning][]. A client **must** evaluate the given
-semantic version and it **must fail** with an appropriate error if it is not
-compatible with the given _major number_. It may indicate discrepancies of the
-_minor number_ but it **must process** the request. 
+JSON-ROA uses [Semantic Versioning][]. The scope of the semantic versioning is
+exactly this document. The semantics apply to the [JSON-ROA
+Object](#json-roa-object) itself and precisely whether changes thereof would
+break JSON-ROA clients implemented for an earlier version. Experimental
+properties are excluded from this rule. 
+
+A client **must** evaluate the given semantic version and it **must fail** with
+an appropriate error if it is not compatible with the given _major number_. It
+may indicate discrepancies of the _minor number_ but it **must process** the
+request. 
+
+
+The semantic version of JSON-ROA is strictly limited to JSON-ROA itself. It
+does not apply to the application.
+{: .text-warning}
+
 
 ## The Content-Type 
 
-The JSON-ROA extension shall be present if and only if the
-resource is delivered with the content type `application/json-roa+json`.
+The JSON-ROA extension shall be present if and only if the resource is
+delivered with the content type `application/json-roa+json`.
 
-
-## The JSON-ROA Object
+## The JSON-ROA Object 
+{: #json-roa-object }
 
 <div class="row"> <div class="col-md-6">
 
-A minimal valid JSON-ROA extension is introduced with `_json-roa`. It
-must contain the key `version` where the value must be formatted
-according to [Semantic Versioning][]. See also the [section Semantic Versioning][].
+The JSON-ROA Object is located unter the `_json-roa` key if the top level 
+element is an object or in the first position of the array otherwise. 
+
+It is discouraged to use arrays as the outer most data structure. 
+{: .text-warning}
+
+A minimal valid JSON-ROA extension must contain the key `json-roa_version`
+where the value must be formatted according to [Semantic Versioning][]. See
+also the [section Semantic Versioning][].
 
 It may further contain the keys `relations`, `collection`, `name`, and
 `self-relation`. See the [relations object][], the [collection object][],
@@ -35,10 +57,16 @@ values.
 
 </div> <div class="col-md-6">
 
-    { "_json-roa": { "version" : "1.0.0" }
+    { "_json-roa": { "json-roa_version" : "1.0.0" }
       , "x": "some other data"
       , "y": 42
       , "z": false }
+  {: .language-json}
+
+    [ { "json-roa_version" : "1.0.0" },
+      { "x": "some other data"
+      , "y": 42
+      , "z": false } ]
   {: .language-json}
 
 
@@ -55,7 +83,7 @@ corresponding value is a [relation object](#the-relation-object).
 </div> <div class="col-md-6">
 
     { "_json-roa":
-      { "version" : "1.0.0"
+      { "json-roa_version" : "1.0.0"
       , "relations": 
           { "t42" : 
             { "href" : "/task/42"} }}}
