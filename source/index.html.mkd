@@ -35,19 +35,6 @@ effort and minimal risk of getting it wrong.
 
 
 
-Differentiation
----------------
-
-Constraints can be liberating. JSON-ROA does not support or discourages
-some practices deliberately. If you planing on doing much of the likes
-below we recommend to look somewhere else. 
-
--   JSON-ROA does not support RPC style usage of HTTP very well.
-
--   If your API is not resource oriented you might find yourself
-    fighting JSON-ROA.
-
-
-
 [The JSON-ROA Browser]: http://json-roa.github.io/browser/index.html
+
 

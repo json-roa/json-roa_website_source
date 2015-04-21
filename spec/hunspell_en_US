@@ -1,5 +1,6 @@
 1GB
 4GB
+4e762513
 API
 APIs
 Ansible
@@ -9,7 +10,10 @@ Demoe
 Dotfile
 ENV
 Github
+Heroku
+Href
 JDK
+JRuby
 JSON
 LD
 Leiningen
@@ -22,6 +26,8 @@ PostgreSQL
 Postgresql
 REPL
 RESTful
+RFC3986
+RFC6570
 ROA
 RPC
 RabbitMQ
@@ -29,10 +35,13 @@ Regualar
 Schank
 Subcontexts
 Ubuntu
+Utils
+Versioning
 YAML
 adam
 admin
 ansible
+b92c
 branchdescendants
 cd
 ci
@@ -40,6 +49,8 @@ clojure
 config
 cp
 createdb
+d903
+da4f0cb3094b
 defauls
 dev
 dotfile
@@ -47,6 +58,7 @@ esr
 executedCider
 executor1
 firefox
+href
 http
 https
 hyperlink
@@ -77,6 +89,8 @@ screenshots
 stati
 subcontext
 subcontexts
+t42
+templated
 truthy
 url
 v1
@@ -85,11 +99,3 @@ vhost
 wip
 yml
 zhkd
-
-Href
-RFC3986
-RFC6570
-Versioning
-href
-t42
-templated
